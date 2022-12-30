@@ -10,20 +10,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // sync sequelize models to the database, then turn on the server
-// ifee
-(async () => {
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync();
-    console.log("db connected");
-  } catch (error) {
-    console.log(error);
-    console.log("db could not be connected");
-  }
-})();
 
 app.use(routes);
 
-app.listen(PORT, () => {
-  console.log(`App is currently live on port ${PORT} 🤙🏼`)
-})
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+});
