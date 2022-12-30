@@ -19,6 +19,8 @@
 
   ## Usage
   - To seed the database, run "npm run seed". Then to initiate the database, run "npm start".
+  - Walk through video
+  [module-13-video.webm](https://user-images.githubusercontent.com/94302477/210116968-ad2ca20a-d69e-43c9-bd99-c632d7684499.webm)
 
   ## License
   - license : MIT ![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
