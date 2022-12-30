@@ -49,20 +49,21 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
+  // this works
   try {
-    const categoryData = await Category.update({category_name: req.body.category_name}, {
-      where: {
-        id: req.params.id
-      },
-      returning: true
-    });
-    
-    if(!categoryData) {
-      res.status(404).json({message: 'no category with this id found.'});
-      return;
-    }
+    const category = await Category.findOne({
+        where: {
+         id: req.params.id
+       },
+    })
 
-    return res.json(categoryData)
+    if(!category) {
+      return res.status(404).json({message: 'no category with this id found.'});
+    } else {
+      category.category_name = req.body.category_name;
+      await category.save();
+      return res.json(category)
+    }  
   } catch(err) {
     res.status(500).json(err)
   }
@@ -79,6 +80,8 @@ router.delete('/:id', async (req, res) => {
 
     if(!categoryData) {
       res.status(404).json({message: 'no category with this id found.'})
+    } else {
+      res.json(categoryData)
     }
   } catch(err) {
     res.status(500).json(err)

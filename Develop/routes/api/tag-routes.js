@@ -76,6 +76,7 @@ router.delete('/:id', async (req, res) => {
     if(!tagData) {
       res.status(404).json({message: 'no tag with this id found.'})
     }
+    res.json(tagData)
   } catch(err) {
     res.status(500).json(err)
   }
